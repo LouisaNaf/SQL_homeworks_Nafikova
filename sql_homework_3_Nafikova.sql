@@ -190,6 +190,7 @@ select count(*),
 		else class 
 	end class_with_0
 from ships full join outcomes on ships.name = outcomes.ship
+where result = 'sunk'
 group by class_with_0
 	 
  
