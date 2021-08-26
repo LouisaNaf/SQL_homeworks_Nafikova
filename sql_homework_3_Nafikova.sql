@@ -1,23 +1,23 @@
 --task10 (lesson4)
--- Компьютерная фирма: На базе products_price_categories_with_makers построить 
---по каждому производителю график (X: category_price, Y: count)
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : ГЌГ  ГЎГ Г§ГҐ products_price_categories_with_makers ГЇГ®Г±ГІГ°Г®ГЁГІГј 
+--ГЇГ® ГЄГ Г¦Г¤Г®Г¬Гі ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гѕ ГЈГ°Г ГґГЁГЄ (X: category_price, Y: count)
 
 
 --task11 (lesson4)
--- Компьютерная фирма: На базе products_price_categories_with_makers по строить по A & D график (X: category_price, Y: count)
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : ГЌГ  ГЎГ Г§ГҐ products_price_categories_with_makers ГЇГ® Г±ГІГ°Г®ГЁГІГј ГЇГ® A & D ГЈГ°Г ГґГЁГЄ (X: category_price, Y: count)
 
 
 --task12 (lesson4)
--- Корабли: Сделать копию таблицы ships, но у название корабля не должно начинаться с буквы N (ships_without_n)
+-- ГЉГ®Г°Г ГЎГ«ГЁ: Г‘Г¤ГҐГ«Г ГІГј ГЄГ®ГЇГЁГѕ ГІГ ГЎГ«ГЁГ¶Г» ships, Г­Г® Гі Г­Г Г§ГўГ Г­ГЁГҐ ГЄГ®Г°Г ГЎГ«Гї Г­ГҐ Г¤Г®Г«Г¦Г­Г® Г­Г Г·ГЁГ­Г ГІГјГ±Гї Г± ГЎГіГЄГўГ» N (ships_without_n)
 create table ships_2 as 
 select * from ships where name not like 'N%'
 
---схема БД: https://docs.google.com/document/d/1NVORWgdwlKepKq_b8SPRaSpraltxoMg2SIusTEN6mEQ/edit?usp=sharing
+--Г±ГµГҐГ¬Г  ГЃГ„: https://docs.google.com/document/d/1NVORWgdwlKepKq_b8SPRaSpraltxoMg2SIusTEN6mEQ/edit?usp=sharing
 --colab/jupyter: https://colab.research.google.com/drive/1j4XdGIU__NYPVpv74vQa9HUOAkxsgUez?usp=sharing
 
 --task13 (lesson3)
---Компьютерная фирма: Вывести список всех продуктов и производителя с указанием типа продукта (pc, printer, laptop). 
--- Вывести: model, maker, type
+--ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‚Г»ГўГҐГ±ГІГЁ Г±ГЇГЁГ±Г®ГЄ ГўГ±ГҐГµ ГЇГ°Г®Г¤ГіГЄГІГ®Гў ГЁ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї Г± ГіГЄГ Г§Г Г­ГЁГҐГ¬ ГІГЁГЇГ  ГЇГ°Г®Г¤ГіГЄГІГ  (pc, printer, laptop). 
+-- Г‚Г»ГўГҐГ±ГІГЁ: model, maker, type
 
 select pc.model, maker, product.type  from pc join product on pc.model = product.model
 union all
@@ -27,12 +27,12 @@ select laptop.model, maker, product.type  from laptop join product on laptop.mod
 
 
 --task14 (lesson3)
---Компьютерная фирма: При выводе всех значений из таблицы printer дополнительно вывести для тех, 
---у кого цена вышей средней PC - "1", у остальных - "0"
+--ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : ГЏГ°ГЁ ГўГ»ГўГ®Г¤ГҐ ГўГ±ГҐГµ Г§Г­Г Г·ГҐГ­ГЁГ© ГЁГ§ ГІГ ГЎГ«ГЁГ¶Г» printer Г¤Г®ГЇГ®Г«Г­ГЁГІГҐГ«ГјГ­Г® ГўГ»ГўГҐГ±ГІГЁ Г¤Г«Гї ГІГҐГµ, 
+--Гі ГЄГ®ГЈГ® Г¶ГҐГ­Г  ГўГ»ГёГҐГ© Г±Г°ГҐГ¤Г­ГҐГ© PC - "1", Гі Г®Г±ГІГ Г«ГјГ­Г»Гµ - "0"
 
 select *,
 case 
-	when price > (select avg(price) from printer)
+	when price > (select avg(price) from PC)
 	then '1'
 	else '0'
 	end flag
@@ -40,7 +40,7 @@ from printer
 
 
 --task15 (lesson3)
---Корабли: Вывести список кораблей, у которых class отсутствует (IS NULL)
+--ГЉГ®Г°Г ГЎГ«ГЁ: Г‚Г»ГўГҐГ±ГІГЁ Г±ГЇГЁГ±Г®ГЄ ГЄГ®Г°Г ГЎГ«ГҐГ©, Гі ГЄГ®ГІГ®Г°Г»Гµ class Г®ГІГ±ГіГІГ±ГІГўГіГҐГІ (IS NULL)
 select *
 from outcomes full join ships 
 on ships.name = outcomes.ship
@@ -48,14 +48,14 @@ where class is null
 
 
 --task16 (lesson3)
---Корабли: Укажите сражения, которые произошли в годы, не совпадающие ни с одним из годов спуска кораблей на воду.
+--ГЉГ®Г°Г ГЎГ«ГЁ: Г“ГЄГ Г¦ГЁГІГҐ Г±Г°Г Г¦ГҐГ­ГЁГї, ГЄГ®ГІГ®Г°Г»ГҐ ГЇГ°Г®ГЁГ§Г®ГёГ«ГЁ Гў ГЈГ®Г¤Г», Г­ГҐ Г±Г®ГўГЇГ Г¤Г ГѕГ№ГЁГҐ Г­ГЁ Г± Г®Г¤Г­ГЁГ¬ ГЁГ§ ГЈГ®Г¤Г®Гў Г±ГЇГіГ±ГЄГ  ГЄГ®Г°Г ГЎГ«ГҐГ© Г­Г  ГўГ®Г¤Гі.
 select name from battles
 where cast(date as varchar(4)) not in 
 		(select cast (launched as varchar(4)) from ships)
 
 
 --task17 (lesson3)
---Корабли: Найдите сражения, в которых участвовали корабли класса Kongo из таблицы Ships.
+--ГЉГ®Г°Г ГЎГ«ГЁ: ГЌГ Г©Г¤ГЁГІГҐ Г±Г°Г Г¦ГҐГ­ГЁГї, Гў ГЄГ®ГІГ®Г°Г»Гµ ГіГ·Г Г±ГІГўГ®ГўГ Г«ГЁ ГЄГ®Г°Г ГЎГ«ГЁ ГЄГ«Г Г±Г±Г  Kongo ГЁГ§ ГІГ ГЎГ«ГЁГ¶Г» Ships.
 select battle 
 from outcomes full join ships 
 on ships.name = outcomes.ship
@@ -63,8 +63,8 @@ where class = 'Kongo' and battle is not null
 
 
 --task1  (lesson4)
--- Компьютерная фирма: Сделать view (название all_products_flag_300) для всех товаров (pc, printer, laptop) 
--- с флагом, если стоимость больше > 300. Во view три колонки: model, price, flag
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‘Г¤ГҐГ«Г ГІГј view (Г­Г Г§ГўГ Г­ГЁГҐ all_products_flag_300) Г¤Г«Гї ГўГ±ГҐГµ ГІГ®ГўГ Г°Г®Гў (pc, printer, laptop) 
+-- Г± ГґГ«Г ГЈГ®Г¬, ГҐГ±Г«ГЁ Г±ГІГ®ГЁГ¬Г®Г±ГІГј ГЎГ®Г«ГјГёГҐ > 300. Г‚Г® view ГІГ°ГЁ ГЄГ®Г«Г®Г­ГЄГЁ: model, price, flag
 create view all_products_flag_300 as
 select model, price,
 case
@@ -81,8 +81,8 @@ from
 
 
 --task2  (lesson4)
--- Компьютерная фирма: Сделать view (название all_products_flag_avg_price) для всех товаров (pc, printer, laptop) 
---с флагом, если стоимость больше cредней . Во view три колонки: model, price, flag
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‘Г¤ГҐГ«Г ГІГј view (Г­Г Г§ГўГ Г­ГЁГҐ all_products_flag_avg_price) Г¤Г«Гї ГўГ±ГҐГµ ГІГ®ГўГ Г°Г®Гў (pc, printer, laptop) 
+--Г± ГґГ«Г ГЈГ®Г¬, ГҐГ±Г«ГЁ Г±ГІГ®ГЁГ¬Г®Г±ГІГј ГЎГ®Г«ГјГёГҐ cГ°ГҐГ¤Г­ГҐГ© . Г‚Г® view ГІГ°ГЁ ГЄГ®Г«Г®Г­ГЄГЁ: model, price, flag
 create view all_products_flag_avg_price as
 select model, price,
 case
@@ -105,8 +105,8 @@ end flag
 	
 	
 --task3  (lesson4)
--- Компьютерная фирма: Вывести все принтеры производителя = 'A' со стоимостью 
---выше средней по принтерам производителя = 'D' и 'C'. Вывести model
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‚Г»ГўГҐГ±ГІГЁ ГўГ±ГҐ ГЇГ°ГЁГ­ГІГҐГ°Г» ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї = 'A' Г±Г® Г±ГІГ®ГЁГ¬Г®Г±ГІГјГѕ 
+--ГўГ»ГёГҐ Г±Г°ГҐГ¤Г­ГҐГ© ГЇГ® ГЇГ°ГЁГ­ГІГҐГ°Г Г¬ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї = 'D' ГЁ 'C'. Г‚Г»ГўГҐГ±ГІГЁ model
 					
 select printer.model
 from printer join product on product.model = printer.model
@@ -116,8 +116,8 @@ and price > (select avg (price) from printer join product on product.model = pri
 		
 					
 --task4 (lesson4)
--- Компьютерная фирма: Вывести все товары производителя = 'A' со стоимостью 
--- выше средней по принтерам производителя = 'D' и 'C'. Вывести model
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‚Г»ГўГҐГ±ГІГЁ ГўГ±ГҐ ГІГ®ГўГ Г°Г» ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї = 'A' Г±Г® Г±ГІГ®ГЁГ¬Г®Г±ГІГјГѕ 
+-- ГўГ»ГёГҐ Г±Г°ГҐГ¤Г­ГҐГ© ГЇГ® ГЇГ°ГЁГ­ГІГҐГ°Г Г¬ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї = 'D' ГЁ 'C'. Г‚Г»ГўГҐГ±ГІГЁ model
 select model
 from
 	(select pc.model, maker,price from product join pc on product.model = pc.model 
@@ -131,7 +131,7 @@ and price > (select avg (price) from printer join product on product.model = pri
 						
 			
 --task5 (lesson4)
--- Компьютерная фирма: Какая средняя цена среди уникальных продуктов производителя = 'A' (printer & laptop & pc)
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : ГЉГ ГЄГ Гї Г±Г°ГҐГ¤Г­ГїГї Г¶ГҐГ­Г  Г±Г°ГҐГ¤ГЁ ГіГ­ГЁГЄГ Г«ГјГ­Г»Гµ ГЇГ°Г®Г¤ГіГЄГІГ®Гў ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї = 'A' (printer & laptop & pc)
 select avg (price)
 from
 	(select pc.model, maker, price from product join pc on product.model = pc.model 
@@ -143,7 +143,7 @@ where maker = 'A'
 
 		
 --task6 (lesson4)
--- Компьютерная фирма: Сделать view с количеством товаров (название count_products_by_makers) по каждому производителю. Во view: maker, count
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‘Г¤ГҐГ«Г ГІГј view Г± ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ®Г¬ ГІГ®ГўГ Г°Г®Гў (Г­Г Г§ГўГ Г­ГЁГҐ count_products_by_makers) ГЇГ® ГЄГ Г¦Г¤Г®Г¬Гі ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гѕ. Г‚Г® view: maker, count
 
 create view count_products_by_makers as
 select maker, count(*)
@@ -156,12 +156,12 @@ from
 group by maker
 
 --task7 (lesson4)
--- По предыдущему view (count_products_by_makers) сделать график в colab (X: maker, y: count)
+-- ГЏГ® ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГҐГ¬Гі view (count_products_by_makers) Г±Г¤ГҐГ«Г ГІГј ГЈГ°Г ГґГЁГЄ Гў colab (X: maker, y: count)
 
 
 
 --task8 (lesson4)
--- Компьютерная фирма: Сделать копию таблицы printer (название printer_updated) и удалить из нее все принтеры производителя 'D'
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‘Г¤ГҐГ«Г ГІГј ГЄГ®ГЇГЁГѕ ГІГ ГЎГ«ГЁГ¶Г» printer (Г­Г Г§ГўГ Г­ГЁГҐ printer_updated) ГЁ ГіГ¤Г Г«ГЁГІГј ГЁГ§ Г­ГҐГҐ ГўГ±ГҐ ГЇГ°ГЁГ­ГІГҐГ°Г» ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї 'D'
 
 create table printer_updated as table printer
 
@@ -170,8 +170,8 @@ where model in (select printer_updated.model from product join printer_updated o
          where maker = 'D')
 
 --task9 (lesson4)
--- Компьютерная фирма: Сделать на базе таблицы (printer_updated) view 
---с дополнительной колонкой производителя (название printer_updated_with_makers)
+-- ГЉГ®Г¬ГЇГјГѕГІГҐГ°Г­Г Гї ГґГЁГ°Г¬Г : Г‘Г¤ГҐГ«Г ГІГј Г­Г  ГЎГ Г§ГҐ ГІГ ГЎГ«ГЁГ¶Г» (printer_updated) view 
+--Г± Г¤Г®ГЇГ®Г«Г­ГЁГІГҐГ«ГјГ­Г®Г© ГЄГ®Г«Г®Г­ГЄГ®Г© ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«Гї (Г­Г Г§ГўГ Г­ГЁГҐ printer_updated_with_makers)
        
  create view printer_updated_with_makers as 
  select code, printer_updated.model, color, printer_updated.type, price, maker 
@@ -179,8 +179,8 @@ where model in (select printer_updated.model from product join printer_updated o
          
          
 --task10 (lesson4)
--- Корабли: Сделать view c количеством потопленных кораблей и классом корабля (название sunk_ships_by_classes). 
---Во view: count, class (если значения класса нет/IS NULL, то заменить на 0)
+-- ГЉГ®Г°Г ГЎГ«ГЁ: Г‘Г¤ГҐГ«Г ГІГј view c ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ®Г¬ ГЇГ®ГІГ®ГЇГ«ГҐГ­Г­Г»Гµ ГЄГ®Г°Г ГЎГ«ГҐГ© ГЁ ГЄГ«Г Г±Г±Г®Г¬ ГЄГ®Г°Г ГЎГ«Гї (Г­Г Г§ГўГ Г­ГЁГҐ sunk_ships_by_classes). 
+--Г‚Г® view: count, class (ГҐГ±Г«ГЁ Г§Г­Г Г·ГҐГ­ГЁГї ГЄГ«Г Г±Г±Г  Г­ГҐГІ/IS NULL, ГІГ® Г§Г Г¬ГҐГ­ГЁГІГј Г­Г  0)
 
 create view sunk_ships_by_classes as
 select count(*),
@@ -194,14 +194,14 @@ group by class_with_0
 	 
  
 --task11 (lesson4)
--- Корабли: По предыдущему view (sunk_ships_by_classes) сделать график в colab (X: class, Y: count)
+-- ГЉГ®Г°Г ГЎГ«ГЁ: ГЏГ® ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГҐГ¬Гі view (sunk_ships_by_classes) Г±Г¤ГҐГ«Г ГІГј ГЈГ°Г ГґГЁГЄ Гў colab (X: class, Y: count)
 
 
 
 
 --task12 (lesson4)
--- Корабли: Сделать копию таблицы classes (название classes_with_flag) и добавить в нее flag: 
---если количество орудий больше или равно 9 - то 1, иначе 0
+-- ГЉГ®Г°Г ГЎГ«ГЁ: Г‘Г¤ГҐГ«Г ГІГј ГЄГ®ГЇГЁГѕ ГІГ ГЎГ«ГЁГ¶Г» classes (Г­Г Г§ГўГ Г­ГЁГҐ classes_with_flag) ГЁ Г¤Г®ГЎГ ГўГЁГІГј Гў Г­ГҐГҐ flag: 
+--ГҐГ±Г«ГЁ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г®Г°ГіГ¤ГЁГ© ГЎГ®Г«ГјГёГҐ ГЁГ«ГЁ Г°Г ГўГ­Г® 9 - ГІГ® 1, ГЁГ­Г Г·ГҐ 0
 
 create table classes_with_flag as table classes
 select *,
@@ -214,12 +214,12 @@ from classes_with_flag
 
 
 --task13 (lesson4)
--- Корабли: Сделать график в colab по таблице classes с количеством классов по странам (X: country, Y: count)
+-- ГЉГ®Г°Г ГЎГ«ГЁ: Г‘Г¤ГҐГ«Г ГІГј ГЈГ°Г ГґГЁГЄ Гў colab ГЇГ® ГІГ ГЎГ«ГЁГ¶ГҐ classes Г± ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ®Г¬ ГЄГ«Г Г±Г±Г®Гў ГЇГ® Г±ГІГ°Г Г­Г Г¬ (X: country, Y: count)
 
 
 
 --task14 (lesson4)
--- Корабли: Вернуть количество кораблей, у которых название начинается с буквы "O" или "M".
+-- ГЉГ®Г°Г ГЎГ«ГЁ: Г‚ГҐГ°Г­ГіГІГј ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ®Г°Г ГЎГ«ГҐГ©, Гі ГЄГ®ГІГ®Г°Г»Гµ Г­Г Г§ГўГ Г­ГЁГҐ Г­Г Г·ГЁГ­Г ГҐГІГ±Гї Г± ГЎГіГЄГўГ» "O" ГЁГ«ГЁ "M".
 
 select count(*)
 from ships 
@@ -227,10 +227,10 @@ where name like 'O%' or name like 'M%'
 
 
 --task15 (lesson4)
--- Корабли: Вернуть количество кораблей, у которых название состоит из двух слов.
+-- ГЉГ®Г°Г ГЎГ«ГЁ: Г‚ГҐГ°Г­ГіГІГј ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ®Г°Г ГЎГ«ГҐГ©, Гі ГЄГ®ГІГ®Г°Г»Гµ Г­Г Г§ГўГ Г­ГЁГҐ Г±Г®Г±ГІГ®ГЁГІ ГЁГ§ Г¤ГўГіГµ Г±Г«Г®Гў.
 select count(*)
 from ships 
 where name like '% %'
 
 --task16 (lesson4)
--- Корабли: Построить график с количеством запущенных на воду кораблей и годом запуска (X: year, Y: count)
+-- ГЉГ®Г°Г ГЎГ«ГЁ: ГЏГ®Г±ГІГ°Г®ГЁГІГј ГЈГ°Г ГґГЁГЄ Г± ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ®Г¬ Г§Г ГЇГіГ№ГҐГ­Г­Г»Гµ Г­Г  ГўГ®Г¤Гі ГЄГ®Г°Г ГЎГ«ГҐГ© ГЁ ГЈГ®Г¤Г®Г¬ Г§Г ГЇГіГ±ГЄГ  (X: year, Y: count)
